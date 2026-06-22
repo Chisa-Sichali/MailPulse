@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d95e1a6b-a02e-41a4-a8f2-12413f957aac" name="Changes" comment="- Added worker.py changes" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="38ZN8hwPXKTUEXkNrC23xz7Xikd" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.clean_email_subject.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.parse_sender.executor": "Run",
+    "Python.router.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/chisa/Documents/Personal/Projects/Open Source/email_forwarder",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\chisa\Documents\Projects\email_forwarder\src\api\v1" />
+      <recent name="C:\Users\chisa\Documents\Projects\email_forwarder\src" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-890ed5b35930-d9c5bdb153f4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.23774.444" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d95e1a6b-a02e-41a4-a8f2-12413f957aac" name="Changes" comment="" />
+      <created>1769002975287</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1769002975287</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1769031497682</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1769031497682</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1769031510846</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1769031510846</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update: removed email credentials from code">
+      <option name="closed" value="true" />
+      <created>1769033198174</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1769033198174</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update:&#10;- restructured the project setup&#10;- created a function to remove digital signatures from the email body in src/helpers/remove_digital_signatures">
+      <option name="closed" value="true" />
+      <created>1769077329963</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1769077329963</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fix(bug):&#10;- changed the worker import in main to module not found error">
+      <option name="closed" value="true" />
+      <created>1769078110612</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1769078110612</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update:&#10;- added README.md and .env.example">
+      <option name="closed" value="true" />
+      <created>1769080823193</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1769080823193</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update:&#10;- added .env credentials&#10;- added parse_sender function to display correct sender email">
+      <option name="closed" value="true" />
+      <created>1769428077169</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1769428077169</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: implement email body sanitization for ticket creation via email">
+      <option name="closed" value="true" />
+      <created>1769509136957</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1769509136957</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: implement email subject sanitization for ticket creation via email">
+      <option name="closed" value="true" />
+      <created>1769757397631</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1769757397631</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: expanded on the clean_subject() function to account for all cases">
+      <option name="closed" value="true" />
+      <created>1770128593991</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1770128593991</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: added a helper function is_reply() to skip emails that are replies">
+      <option name="closed" value="true" />
+      <created>1770297376967</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1770297376967</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: Implement email forwarding API and refactor worker&#10;This commit introduces a new API endpoint for triggering email forwarding and refactors the existing email worker into the API structure.&#10;- Renamed `src/worker.py` to `src/api/v1/worker.py` to align with API versioning.&#10;- Created `src/api/v1/router.py` to define a FastAPI endpoint `/run-email-check`.&#10;- The new endpoint calls `fetch_and_forward_emails` from the refactored worker, allowing for external triggering of the email forwarding process.">
+      <option name="closed" value="true" />
+      <created>1770690742999</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1770690742999</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update:&#10;- changed NEXT_API_ROUTE to v1 route">
+      <option name="closed" value="true" />
+      <created>1776259752297</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1776259752297</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: implement request verification and secure configuration management&#10;Introduces a Bearer token authentication mechanism for the email-check endpoint and centralizes environment configuration.&#10;   - Created `src/config/config.py` to centralize environment variable management.&#10;   - Implemented `verify_cron_request` helper in `src/helpers/verify_requests.py` using FastAPI's `HTTPBearer` for secure route protection.&#10;   - Updated `src/api/v1/router.py` to enforce authentication on the `/run-email-check` endpoint.&#10;   - Refactored `src/api/v1/worker.py` to include the `CRON_SECRET_KEY` in the Authorization header when forwarding emails to the Next.js API.&#10;   - Added `CRON_SECRET_KEY` to environment configuration.">
+      <option name="closed" value="true" />
+      <created>1776677384690</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1776677384690</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Update: removed email credentials from code" />
+    <MESSAGE value="Update:&#10;- restructured the project setup&#10;- created a function to remove digital signatures from the email body in src/helpers/remove_digital_signatures" />
+    <MESSAGE value="Fix(bug):&#10;- changed the worker import in main to module not found error" />
+    <MESSAGE value="Update:&#10;- added README.md and .env.example" />
+    <MESSAGE value="Update:&#10;- added .env credentials&#10;- added parse_sender function to display correct sender email" />
+    <MESSAGE value="feat: implement email body sanitization for ticket creation via email" />
+    <MESSAGE value="feat: implement email subject sanitization for ticket creation via email" />
+    <MESSAGE value="feat: expanded on the clean_subject() function to account for all cases" />
+    <MESSAGE value="feat: added a helper function is_reply() to skip emails that are replies" />
+    <MESSAGE value="feat: Implement email forwarding API and refactor worker&#10;This commit introduces a new API endpoint for triggering email forwarding and refactors the existing email worker into the API structure.&#10;- Renamed `src/worker.py` to `src/api/v1/worker.py` to align with API versioning.&#10;- Created `src/api/v1/router.py` to define a FastAPI endpoint `/run-email-check`.&#10;- The new endpoint calls `fetch_and_forward_emails` from the refactored worker, allowing for external triggering of the email forwarding process." />
+    <MESSAGE value="Update:&#10;- changed NEXT_API_ROUTE to v1 route" />
+    <MESSAGE value="feat: implement request verification and secure configuration management&#10;Introduces a Bearer token authentication mechanism for the email-check endpoint and centralizes environment configuration.&#10;   - Created `src/config/config.py` to centralize environment variable management.&#10;   - Implemented `verify_cron_request` helper in `src/helpers/verify_requests.py` using FastAPI's `HTTPBearer` for secure route protection.&#10;   - Updated `src/api/v1/router.py` to enforce authentication on the `/run-email-check` endpoint.&#10;   - Refactored `src/api/v1/worker.py` to include the `CRON_SECRET_KEY` in the Authorization header when forwarding emails to the Next.js API.&#10;   - Added `CRON_SECRET_KEY` to environment configuration." />
+    <MESSAGE value="- Added worker.py changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added worker.py changes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/helpers/logger.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/database/repositories/analytics_repository.py</url>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

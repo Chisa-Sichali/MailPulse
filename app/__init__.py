@@ -1,0 +1,1 @@
+"""MailPulse application package."""
