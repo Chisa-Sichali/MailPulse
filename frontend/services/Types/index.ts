@@ -2,4 +2,6 @@ export type {
   CreateUserRequest,
   CreateUserResponse,
   LoginRequest,
-} from "./user-types";
+  RefreshTokenRequest,
+  RefreshTokenResponse,
+} from './user-types';

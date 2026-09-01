@@ -1,5 +1,6 @@
 import React from "react";
 import AppSidebar from "@/components/AppSidebar";
+import AuthGuard from "@/features/auth/AuthGuard";
 import {
   SidebarInset,
   SidebarProvider,
@@ -12,12 +13,14 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <SidebarTrigger />
-        {children}
-      </SidebarInset>
-    </SidebarProvider>
+    <AuthGuard>
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarInset>
+          <SidebarTrigger />
+          {children}
+        </SidebarInset>
+      </SidebarProvider>
+    </AuthGuard>
   );
 }

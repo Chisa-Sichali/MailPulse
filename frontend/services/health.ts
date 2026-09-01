@@ -1,7 +1,7 @@
 import { config } from '@/config/config';
+import { apiFetch } from '@/services/api-client';
 
 class HealthService {
-  private static baseUrl = `${config.fastapi_backend_url}/api/v1`;
   private static healthBaseUrl = config.fastapi_backend_url;
 
   async getSystemHealth() {
@@ -24,13 +24,8 @@ class HealthService {
 
   async getAnalyticsOverview(days?: number) {
     try {
-      const token = localStorage.getItem('accessToken');
-      const response = await fetch(`${HealthService.baseUrl}/analytics/overview?days=${days}`, {
+      const response = await apiFetch(`/analytics/overview?days=${days}`, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
       });
       if (!response.ok) {
         throw new Error('Network response was not ok');
