@@ -29,7 +29,7 @@ export function LoginContainer() {
       onSuccess: () => {
         toast.add({
           title: "Login successful",
-          description: "Welcome back! redirecting to dashboard...",
+          description: "Welcome back! redirecting...",
           type: "success",
         });
 
@@ -74,7 +74,8 @@ export function LoginContainer() {
       </Field>
       <Button
         type="submit"
-        className="mt-1 h-11 w-full cursor-pointer bg-linear-to-r from-[#6366f1] to-[#8b5cf6] text-white hover:opacity-90"
+        disabled={isPending}
+        className={`mt-1 h-11 w-full cursor-pointer bg-linear-to-r from-[#6366f1] to-[#8b5cf6] ${isPending ? "opacity-50 cursor-not-allowed" : "hover:opacity-90"} text-white`}
       >
         {isPending ? (
           <Loader className="mr-2 h-4 w-4 animate-spin" />

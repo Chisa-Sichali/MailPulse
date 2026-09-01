@@ -4,7 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d95e1a6b-a02e-41a4-a8f2-12413f957aac" name="Changes" comment="- Added worker.py changes" />
+    <list default="true" id="d95e1a6b-a02e-41a4-a8f2-12413f957aac" name="Changes" comment="Update(readme):&#10;- Updated README.md to reflect ongoing frontend chagnes as well as updated running process.">
+      <change afterPath="$PROJECT_DIR$/frontend/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/components/skeleton/DashboardHeaderLoader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/features/dashboard/DashboardStats.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/assets/degraded.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/assets/operational.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/services/Types/dashboard-types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/services/health.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/stores/dashboard.store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/email_forwarder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/email_forwarder.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apprunner.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/apprunner.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/(protected)/dashboard/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/(protected)/dashboard/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/(protected)/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/(protected)/dashboard/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/features/auth/LoginContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/features/auth/LoginContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/services/Types/user-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/services/Types/user-types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/services/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/services/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/stores/auth.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/stores/auth.store.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +57,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JavaScript Debug.index.html.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.clean_email_subject.executor": "Run",
     "Python.main.executor": "Run",
@@ -40,9 +65,12 @@
     "Python.router.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "development",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/chisa/Documents/Personal/Projects/Open Source/email_forwarder",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
@@ -52,10 +80,20 @@
       <recent name="C:\Users\chisa\Documents\Projects\email_forwarder\src" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63343/MailPulse/sketches/001-sleek-professional/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-890ed5b35930-d9c5bdb153f4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.23774.444" />
+        <option value="bundled-python-sdk-c6d794e1806d-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.8665.309" />
       </set>
     </attachedChunks>
   </component>
@@ -66,6 +104,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1769002975287</updated>
+      <workItem from="1786355548934" duration="1445000" />
+      <workItem from="1786436857000" duration="335000" />
+      <workItem from="1786437220917" duration="2774000" />
+      <workItem from="1786696736488" duration="401000" />
+      <workItem from="1786964465482" duration="13000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -179,8 +222,19 @@
       <option name="project" value="LOCAL" />
       <updated>1776677384690</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Update(readme):&#10;- Updated README.md to reflect ongoing frontend chagnes as well as updated running process.">
+      <option name="closed" value="true" />
+      <created>1786437350566</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1786437350566</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -208,7 +262,8 @@
     <MESSAGE value="Update:&#10;- changed NEXT_API_ROUTE to v1 route" />
     <MESSAGE value="feat: implement request verification and secure configuration management&#10;Introduces a Bearer token authentication mechanism for the email-check endpoint and centralizes environment configuration.&#10;   - Created `src/config/config.py` to centralize environment variable management.&#10;   - Implemented `verify_cron_request` helper in `src/helpers/verify_requests.py` using FastAPI's `HTTPBearer` for secure route protection.&#10;   - Updated `src/api/v1/router.py` to enforce authentication on the `/run-email-check` endpoint.&#10;   - Refactored `src/api/v1/worker.py` to include the `CRON_SECRET_KEY` in the Authorization header when forwarding emails to the Next.js API.&#10;   - Added `CRON_SECRET_KEY` to environment configuration." />
     <MESSAGE value="- Added worker.py changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added worker.py changes" />
+    <MESSAGE value="Update(readme):&#10;- Updated README.md to reflect ongoing frontend chagnes as well as updated running process." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update(readme):&#10;- Updated README.md to reflect ongoing frontend chagnes as well as updated running process." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
