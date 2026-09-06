@@ -2,10 +2,12 @@ import { Mail } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SignupContainer } from "./SignupContainer";
 import { LoginContainer } from "./LoginContainer";
+import { DarkModeSwitcher } from "@/components/DarkModeSwitcher";
 
 export default function AuthContainer() {
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-background px-4 py-8 sm:px-6">
+    <div className="relative flex min-h-dvh items-center justify-center bg-background px-4 py-8 sm:px-6">
+      <div className="absolute right-4 top-4"><DarkModeSwitcher /></div>
       <div className="flex w-full max-w-md flex-col">
         {/* Brand */}
         <div className="flex items-center justify-center gap-2.5">

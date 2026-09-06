@@ -4,7 +4,6 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
   SidebarMenu,
   SidebarMenuItem,
   SidebarHeader,
@@ -15,6 +14,7 @@ import { usePathname } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { SidebarLinks } from "@/utils/data/sidebar-data";
 import { Mail } from "lucide-react";
+import { DarkModeSwitcher } from "@/components/DarkModeSwitcher";
 
 export default function AppSidebar() {
   const pathname = usePathname();
@@ -52,6 +52,12 @@ export default function AppSidebar() {
           ))}
         </SidebarMenu>
       </SidebarContent>
+      <SidebarFooter className="border-t border-sidebar-border p-2">
+        <div className="flex items-center justify-between px-2 py-1 text-xs text-muted-foreground">
+          <span>Appearance</span>
+          <DarkModeSwitcher />
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }
