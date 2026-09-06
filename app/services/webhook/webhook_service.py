@@ -265,8 +265,8 @@ class WebhookService:
         )
         return webhook, secret
 
-    async def list_webhooks(self, *, user: User) -> list[Webhook]:
-        return await self._webhooks.list_for_user(user.id)
+    async def list_webhooks(self, *, user: User, limit: int = 50, offset: int = 0) -> list[Webhook]:
+        return await self._webhooks.list_for_user(user.id, limit=limit, offset=offset)
 
     async def get_webhook(self, *, user: User, webhook_id: uuid.UUID) -> Webhook:
         webhook = await self._webhooks.get_by_id_for_user(webhook_id, user.id)

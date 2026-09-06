@@ -10,6 +10,7 @@ from app.schemas.webhooks import (
     WebhookDeliveryListResponse,
     WebhookDeliveryResponse,
     WebhookResponse,
+    WebhookListResponse,
     WebhookSecretResponse,
     WebhookTestResponse,
     WebhookUpdateRequest,
@@ -42,13 +43,15 @@ async def create_webhook(
     )
 
 
-@router.get("", response_model=list[WebhookResponse])
+@router.get("", response_model=WebhookListResponse)
 async def list_webhooks(
+    limit: int = Query(default=50, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
     current_user: User = Depends(get_current_user),
     webhook_service: WebhookService = Depends(get_webhook_service),
-) -> list[WebhookResponse]:
-    webhooks = await webhook_service.list_webhooks(user=current_user)
-    return [_webhook_response(item) for item in webhooks]
+) -> WebhookListResponse:
+    webhooks = await webhook_service.list_webhooks(user=current_user, limit=limit, offset=offset)
+    return WebhookListResponse(items=[_webhook_response(item) for item in webhooks], limit=limit, offset=offset)
 
 
 @router.get("/{webhook_id}", response_model=WebhookResponse)

@@ -35,8 +35,10 @@ async def test_create_and_list_mailbox(client: AsyncClient, auth_headers: dict[s
     list_response = await client.get("/api/v1/mailboxes", headers=auth_headers)
     assert list_response.status_code == 200
     mailboxes = list_response.json()
-    assert len(mailboxes) == 1
-    assert mailboxes[0]["id"] == created["id"]
+    assert mailboxes["limit"] == 50
+    assert mailboxes["offset"] == 0
+    assert len(mailboxes["items"]) == 1
+    assert mailboxes["items"][0]["id"] == created["id"]
 
 
 @pytest.mark.asyncio

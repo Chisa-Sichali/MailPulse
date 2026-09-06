@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d95e1a6b-a02e-41a4-a8f2-12413f957aac" name="Changes" comment="Update(readme):&#10;- Updated README.md to reflect ongoing frontend chagnes as well as updated running process.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v1/mailboxes/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/mailboxes/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v1/webhooks/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/webhooks/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/database/repositories/mailbox_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/repositories/mailbox_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/database/repositories/webhook_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/repositories/webhook_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/mailbox.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/mailbox.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/webhooks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/webhooks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/mailbox/mailbox_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/mailbox/mailbox_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/webhook/webhook_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/webhook/webhook_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/AppSidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/AppSidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/services/Types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/services/Types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/services/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/services/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/services/health.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/services/health.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/stores/dashboard.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/stores/dashboard.store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/utils/auth-utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/utils/auth-utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

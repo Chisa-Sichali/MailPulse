@@ -1,6 +1,7 @@
 import { config } from '@/config/config';
 import { apiFetch } from '@/services/api-client';
 import type { AnalyticsOverview, EmailEventList, TopSender, VolumePoint, WebhookPerformance } from '@/services/Types/dashboard-types';
+import type { ResourceCounts } from '@/services/Types';
 
 class HealthService {
   private static healthBaseUrl = config.fastapi_backend_url;
@@ -49,6 +50,8 @@ class HealthService {
   async getWebhookPerformance(days: number): Promise<WebhookPerformance[]> {
     return this.getAnalytics(`/analytics/webhooks?days=${days}`);
   }
+
+  async getResources(): Promise<ResourceCounts> { return this.getAnalytics('/analytics/resources'); }
 
   async getRecentEvents(): Promise<EmailEventList> {
     return this.getAnalytics('/events?limit=8');

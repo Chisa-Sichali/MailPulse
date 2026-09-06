@@ -44,3 +44,9 @@ class MailboxConnectionTestResponse(BaseModel):
     message: str
     health_status: str
     mailbox: MailboxResponse
+
+
+class MailboxListResponse(BaseModel):
+    items: list[MailboxResponse]
+    limit: int
+    offset: int

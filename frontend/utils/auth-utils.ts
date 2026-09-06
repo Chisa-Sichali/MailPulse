@@ -12,6 +12,7 @@ export async function extractErrorMessage(response: Response): Promise<string> {
   try {
     const body = await response.json();
 
+    if (typeof body.error?.message === 'string') return body.error.message;
     if (typeof body.detail === 'string') {
       return body.detail;
     }

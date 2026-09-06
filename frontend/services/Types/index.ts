@@ -4,4 +4,6 @@ export type {
   LoginRequest,
   RefreshTokenRequest,
   RefreshTokenResponse,
+  UserProfile,
 } from './user-types';
+export type * from './infrastructure-types';

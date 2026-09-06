@@ -22,8 +22,11 @@ async def test_create_list_and_get_webhook(client: AsyncClient, auth_headers: di
 
     list_response = await client.get("/api/v1/webhooks", headers=auth_headers)
     assert list_response.status_code == 200
-    assert len(list_response.json()) == 1
-    assert "secret" not in list_response.json()[0]
+    webhooks = list_response.json()
+    assert webhooks["limit"] == 50
+    assert webhooks["offset"] == 0
+    assert len(webhooks["items"]) == 1
+    assert "secret" not in webhooks["items"][0]
 
     webhook_id = created["id"]
     detail_response = await client.get(

@@ -7,6 +7,7 @@ import {
 } from './Types';
 import { extractErrorMessage, removeTokens, setTokens } from '@/utils/auth-utils';
 import { config } from '@/config/config';
+import { apiFetch } from '@/services/api-client';
 
 class AuthService {
   private baseUrl = `${config.fastapi_backend_url}/api/v1`;
@@ -105,6 +106,22 @@ class AuthService {
     setTokens(data.access_token, data.refresh_token);
 
     return data;
+  }
+
+  async GetCurrentUser() {
+    const response = await apiFetch('/auth/me');
+    if (!response.ok) throw new Error(await extractErrorMessage(response));
+    return response.json() as Promise<import('./Types').UserProfile>;
+  }
+
+  async Logout(): Promise<void> {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) return;
+    const response = await fetch(`${this.baseUrl}/auth/logout`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh_token: refreshToken }),
+    });
+    if (!response.ok) throw new Error(await extractErrorMessage(response));
   }
 }
 
