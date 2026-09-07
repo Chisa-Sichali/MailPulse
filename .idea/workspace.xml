@@ -5,54 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d95e1a6b-a02e-41a4-a8f2-12413f957aac" name="Changes" comment="Update(readme):&#10;- Updated README.md to reflect ongoing frontend chagnes as well as updated running process.">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/email_forwarder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mailpulse.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v1/events/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/events/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/core/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/database/repositories/email_event_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/repositories/email_event_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/database/repositories/webhook_delivery_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/repositories/webhook_delivery_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/events.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/events.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/email_processing/event_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/email_processing/event_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/webhook/webhook_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/webhook/webhook_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apprunner.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/.env.example" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/postcss.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/App.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/components/Layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/components/ui.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/lib/api.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/lib/theme.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/main.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/AnalyticsPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/DashboardPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/EventsPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/HealthPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/LoginPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/MailboxesPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/WebhooksPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/vite-env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/tailwind.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/tsconfig.tsbuildinfo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/vite.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/(protected)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/(protected)/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/features/events/EventsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/features/events/EventsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/next.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/services/Types/infrastructure-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/services/Types/infrastructure-types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api-reference.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api_reference.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/architecture.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/authentication.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/authentication.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dashboard.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dashboard.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/database_schema.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/deployment.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/deployment.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/development_setup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/email_processing_flow.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/future_improvements.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/queues_and_workers.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/webhook_system.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/webhooks.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/webhooks.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
