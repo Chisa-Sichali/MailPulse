@@ -2,7 +2,7 @@ export const healthCheck = [
   {
     status: 'healthy',
     service: 'MailPulse',
-    version: '0.1.0',
+    version: '1.0.0',
     environment: 'development',
     checks: {
       database: 'connected',

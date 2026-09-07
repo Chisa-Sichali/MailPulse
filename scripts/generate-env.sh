@@ -116,7 +116,7 @@ echo "[generate-env] frontend: $FRONTEND_ENV"
 write_header "$BACKEND_ENV" "MailPulse backend"
 
 write_kv "$BACKEND_ENV" "APP_NAME"        "MailPulse"
-write_kv "$BACKEND_ENV" "APP_VERSION"     "0.1.0"
+write_kv "$BACKEND_ENV" "APP_VERSION"     "1.0.0"
 write_kv "$BACKEND_ENV" "ENVIRONMENT"     "development"
 write_kv "$BACKEND_ENV" "DEBUG"           "false"
 
