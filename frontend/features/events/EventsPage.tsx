@@ -20,7 +20,7 @@ import {
   TableSkeleton,
 } from '@/features/infrastructure/shared';
 
-const limit = 25;
+const limit = 10;
 const statuses = ['', 'pending', 'delivered', 'failed', 'dead_lettered'];
 const POLL_INTERVAL = 60_000;
 
@@ -111,7 +111,7 @@ export default function EventsPage() {
             </SelectContent>
           </Select>
           <span className="text-muted-foreground text-xs sm:ml-auto">
-            {events.data ? `${events.data.items.length} records in this window` : 'Loading stream…'}
+            {events.data ? `${events.data.total} total records` : 'Loading stream…'}
           </span>
         </section>
         {events.isPending ? (
@@ -126,7 +126,7 @@ export default function EventsPage() {
         ) : (
           <div className="border-border bg-card overflow-hidden rounded-lg border">
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[960px] text-left text-sm">
+              <table className="w-full min-w-240 text-left text-sm">
                 <thead className="bg-muted/30 text-muted-foreground border-b text-xs tracking-wide uppercase">
                   <tr>
                     <th className="px-4 py-3">Message</th>
@@ -182,8 +182,8 @@ export default function EventsPage() {
                             disabled={retry.isPending}
                             onClick={() => retry.mutate(event.id)}
                           >
-                            <RotateCcw />
-                            Retry
+                            <RotateCcw className={retry.isPending && retry.variables === event.id ? 'animate-spin' : ''} />
+                            {retry.isPending && retry.variables === event.id ? 'Retrying...' : 'Retry'}
                           </Button>
                         )}
                       </td>
@@ -207,7 +207,7 @@ export default function EventsPage() {
                 <Button
                   size="sm"
                   variant="outline"
-                  disabled={events.data.items.length < events.data.limit}
+                  disabled={offset + limit >= events.data.total}
                   onClick={() => setOffset((value) => value + limit)}
                 >
                   Next

@@ -35,6 +35,12 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 30
     refresh_token_expire_days: int = 7
 
+    cron_secret_key: str | None = Field(
+        default=None,
+        description="Bearer token that must accompany automated cron requests "
+        "(verified via secrets.compare_digest in app/core/security/cron.py)",
+    )
+
     credential_encryption_key: str | None = Field(
         default=None,
         description="Dedicated key for encrypting mailbox credentials at rest",

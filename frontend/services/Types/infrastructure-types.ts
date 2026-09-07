@@ -19,5 +19,5 @@ export interface WebhookDelivery { id: string; webhook_id: string; email_event_i
 export interface WebhookDeliveryList { items: WebhookDelivery[]; limit: number; offset: number; }
 
 export interface EmailEvent { id: string; mailbox_id: string; message_id: string; imap_uid: string | null; sender_email: string; sender_name: string; recipients: string[]; subject: string; text_body: string; html_body: string; attachments_metadata: Record<string, unknown>[]; in_reply_to: string | null; status: string; error_message: string | null; attempt_count: number; received_at: string | null; processed_at: string | null; created_at: string; updated_at: string; }
-export interface EmailEventList { items: EmailEvent[]; limit: number; offset: number; }
+export interface EmailEventList { items: EmailEvent[]; limit: number; offset: number; total: number; }
 export interface ResourceCounts { mailboxes: number; enabled_mailboxes: number; webhooks: number; }

@@ -32,6 +32,7 @@ class EmailEventListResponse(BaseModel):
     items: list[EmailEventResponse]
     limit: int
     offset: int
+    total: int
 
 
 class MonitorSweepResponse(BaseModel):

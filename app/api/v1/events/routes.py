@@ -19,7 +19,7 @@ async def list_events(
     current_user: User = Depends(get_current_user),
     event_service: EmailEventService = Depends(get_email_event_service),
 ) -> EmailEventListResponse:
-    events = await event_service.list_events(
+    total, events = await event_service.list_events(
         user_id=current_user.id,
         mailbox_id=mailbox_id,
         status=status,
@@ -30,6 +30,7 @@ async def list_events(
         items=[EmailEventResponse.model_validate(event) for event in events],
         limit=limit,
         offset=offset,
+        total=total,
     )
 
 

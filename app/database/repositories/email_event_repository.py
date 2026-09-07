@@ -27,15 +27,20 @@ class EmailEventRepository:
         result = await self._session.execute(stmt)
         return result.scalar_one_or_none()
 
-    async def list_for_user(self, user_id: uuid.UUID, mailbox_id: Optional[uuid.UUID] = None, status: Optional[str] = None, limit: int = 50, offset: int = 0) -> Sequence[EmailEvent]:
-        stmt = select(EmailEvent).join(Mailbox).where(Mailbox.user_id == user_id).order_by(EmailEvent.created_at.desc())
+    async def list_for_user(self, user_id: uuid.UUID, mailbox_id: Optional[uuid.UUID] = None, status: Optional[str] = None, limit: int = 50, offset: int = 0) -> tuple[int, Sequence[EmailEvent]]:
+        from sqlalchemy import func
+        stmt = select(EmailEvent).join(Mailbox).where(Mailbox.user_id == user_id)
         if mailbox_id:
             stmt = stmt.where(EmailEvent.mailbox_id == mailbox_id)
         if status:
             stmt = stmt.where(EmailEvent.status == status)
-        stmt = stmt.limit(limit).offset(offset)
+
+        count_stmt = select(func.count()).select_from(stmt.subquery())
+        total = await self._session.scalar(count_stmt) or 0
+
+        stmt = stmt.order_by(EmailEvent.created_at.desc()).limit(limit).offset(offset)
         result = await self._session.execute(stmt)
-        return result.scalars().all()
+        return total, result.scalars().all()
 
     async def create_from_parsed(self, mailbox_id: uuid.UUID, message_id: str, imap_uid: Optional[str], sender_email: str, sender_name: str, recipients: list, subject: str, text_body: str, html_body: str, attachments_metadata: list, in_reply_to: Optional[str], received_at: Optional[datetime]) -> EmailEvent:
         event = EmailEvent(

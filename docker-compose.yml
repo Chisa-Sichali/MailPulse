@@ -65,14 +65,53 @@ services:
 
   dashboard:
     build:
-      context: ./dashboard
+      context: ./frontend
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_FASTAPI_BACKEND_URL: http://api:8080
+        NEXT_PUBLIC_API_URL: http://localhost:3000
+    image: mailpulse/dashboard:latest
+    container_name: mailpulse-dashboard
+    restart: unless-stopped
     ports:
-      - "3000:80"
+      - "3000:3000"
     environment:
-      VITE_API_URL: http://localhost:8080
+      NEXT_PUBLIC_FASTAPI_BACKEND_URL: http://api:8080
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
     depends_on:
-      - api
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-fsS", "http://127.0.0.1:3000/" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # env-gen — one-shot env generator
+  #
+  # Usage:
+  #   docker compose run --rm env-gen && docker compose up --build
+  #
+  # Runs scripts/generate-env.sh (mounted from the repo) to fill in every
+  # auto-derivable value in backend `.env` and frontend `.env.local` BEFORE
+  # compose reads them (env_file values are captured at container creation).
+  # Idempotent: never overwrites an existing secret.
+  # ───────────────────────────────────────────────────────────────────────────
+  env-gen:
+    image: alpine:3.20
+    working_dir: /app
+    environment:
+      # Signals to the script that the repo bind-mount below is host-backed,
+      # so writing .env / .env.local here is meaningful (not an ephemeral FS).
+      ENV_GEN_ALLOWED: "1"
+    volumes:
+      - .:/app
+    entrypoint: ["/bin/sh", "/app/scripts/generate-env.sh"]
 
 volumes:
   postgres_data:
