@@ -1,7 +1,9 @@
 import { config } from '@/config/config';
+import { apiFetch } from '@/services/api-client';
+import type { AnalyticsOverview, EmailEventList, TopSender, VolumePoint, WebhookPerformance } from '@/services/Types/dashboard-types';
+import type { ResourceCounts } from '@/services/Types';
 
 class HealthService {
-  private static baseUrl = `${config.fastapi_backend_url}/api/v1`;
   private static healthBaseUrl = config.fastapi_backend_url;
 
   async getSystemHealth() {
@@ -22,15 +24,10 @@ class HealthService {
     }
   }
 
-  async getAnalyticsOverview(days?: number) {
+  async getAnalyticsOverview(days?: number): Promise<AnalyticsOverview> {
     try {
-      const token = localStorage.getItem('accessToken');
-      const response = await fetch(`${HealthService.baseUrl}/analytics/overview?days=${days}`, {
+      const response = await apiFetch(`/analytics/overview?days=${days}`, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
       });
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -40,6 +37,30 @@ class HealthService {
       console.error('Error fetching analytics overview:', error);
       throw error;
     }
+  }
+
+  async getVolume(days: number): Promise<VolumePoint[]> {
+    return this.getAnalytics(`/analytics/volume?days=${days}`);
+  }
+
+  async getTopSenders(days: number): Promise<TopSender[]> {
+    return this.getAnalytics(`/analytics/top-senders?days=${days}&limit=6`);
+  }
+
+  async getWebhookPerformance(days: number): Promise<WebhookPerformance[]> {
+    return this.getAnalytics(`/analytics/webhooks?days=${days}`);
+  }
+
+  async getResources(): Promise<ResourceCounts> { return this.getAnalytics('/analytics/resources'); }
+
+  async getRecentEvents(): Promise<EmailEventList> {
+    return this.getAnalytics('/events?limit=8');
+  }
+
+  private async getAnalytics<T>(path: string): Promise<T> {
+    const response = await apiFetch(path, { method: 'GET' });
+    if (!response.ok) throw new Error('Unable to load dashboard data');
+    return response.json() as Promise<T>;
   }
 }
 

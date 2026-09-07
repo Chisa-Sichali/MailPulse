@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Query, status
 
 from app.api.deps import get_current_user, get_mailbox_service
 from app.database.models.mailbox import MailboxHealthStatus
@@ -9,6 +9,7 @@ from app.schemas.mailbox import (
     MailboxConnectionTestResponse,
     MailboxCreateRequest,
     MailboxResponse,
+    MailboxListResponse,
     MailboxUpdateRequest,
 )
 from app.services.mailbox import MailboxService
@@ -34,13 +35,15 @@ async def create_mailbox(
     return MailboxResponse.model_validate(mailbox)
 
 
-@router.get("", response_model=list[MailboxResponse])
+@router.get("", response_model=MailboxListResponse)
 async def list_mailboxes(
+    limit: int = Query(default=50, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
     current_user: User = Depends(get_current_user),
     mailbox_service: MailboxService = Depends(get_mailbox_service),
-) -> list[MailboxResponse]:
-    mailboxes = await mailbox_service.list_mailboxes(user=current_user)
-    return [MailboxResponse.model_validate(item) for item in mailboxes]
+) -> MailboxListResponse:
+    mailboxes = await mailbox_service.list_mailboxes(user=current_user, limit=limit, offset=offset)
+    return MailboxListResponse(items=[MailboxResponse.model_validate(item) for item in mailboxes], limit=limit, offset=offset)
 
 
 @router.get("/{mailbox_id}", response_model=MailboxResponse)

@@ -124,5 +124,5 @@ class WebhookDeliveryRepository:
         delivery.response_body = response_body
         delivery.last_error = error_message
         delivery.next_retry_at = None if dead_letter else next_retry_at
-        delivery.status = WebhookDeliveryStatus.FAILED.value
+        delivery.status = WebhookDeliveryStatus.DEAD_LETTERED.value if dead_letter else WebhookDeliveryStatus.FAILED.value
         return await self.update(delivery)

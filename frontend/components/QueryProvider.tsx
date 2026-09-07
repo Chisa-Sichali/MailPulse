@@ -5,6 +5,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import React, { useState } from 'react';
 
 export default function QueryProvider({children}: {children: React.ReactNode}){
-    const [queryClient] = useState(() => new QueryClient());
+    const [queryClient] = useState(() => new QueryClient({
+      defaultOptions: {
+        queries: { retry: 1, refetchOnWindowFocus: true, refetchIntervalInBackground: false },
+      },
+    }));
     return <QueryClientProvider client={queryClient}>{children} <ReactQueryDevtools initialIsOpen={true}/> </QueryClientProvider>;
 }

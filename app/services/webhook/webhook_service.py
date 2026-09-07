@@ -10,7 +10,7 @@ from app.core.exceptions import NotFoundError, ValidationError
 from app.core.logging import get_logger
 from app.core.security.encryption import decrypt_secret, encrypt_secret
 from app.core.security.webhook_signature import sign_webhook_payload
-from app.database.models.email_event import EmailEvent
+from app.database.models.email_event import EmailEvent, EmailEventStatus
 from app.database.models.user import User
 from app.database.models.webhook import Webhook, WebhookDelivery, WebhookDeliveryStatus
 from app.database.repositories.mailbox_repository import MailboxRepository
@@ -98,6 +98,9 @@ class WebhookDispatcher:
 
         if not webhooks:
             logger.info("No enabled webhooks for user %s", mailbox.user_id)
+            event.status = EmailEventStatus.DELIVERED.value
+            self._session.add(event)
+            await self._session.commit()
             return 0
 
         from app.core.queue import enqueue_deliver_webhook
@@ -160,11 +163,13 @@ class WebhookDispatcher:
             )
             response_body = response.text[:2000] if response.text else None
             if response.is_success:
-                return await self._deliveries.mark_delivered(
+                delivery = await self._deliveries.mark_delivered(
                     delivery,
                     http_status_code=response.status_code,
                     response_body=response_body,
                 )
+                await self._sync_email_event_status(delivery.email_event_id)
+                return delivery
 
             attempt_count = delivery.attempt_count + 1
             dead_letter = attempt_count >= self._settings.webhook_max_attempts
@@ -174,7 +179,7 @@ class WebhookDispatcher:
                 if delay and not dead_letter
                 else None
             )
-            return await self._deliveries.mark_failed(
+            delivery = await self._deliveries.mark_failed(
                 delivery,
                 http_status_code=response.status_code,
                 response_body=response_body,
@@ -182,6 +187,8 @@ class WebhookDispatcher:
                 next_retry_at=next_retry,
                 dead_letter=dead_letter,
             )
+            await self._sync_email_event_status(delivery.email_event_id)
+            return delivery
 
         except Exception as exc:
             attempt_count = delivery.attempt_count + 1
@@ -193,7 +200,7 @@ class WebhookDispatcher:
                 else None
             )
             logger.warning("Webhook delivery %s failed: %s", delivery_id, exc)
-            return await self._deliveries.mark_failed(
+            delivery = await self._deliveries.mark_failed(
                 delivery,
                 http_status_code=None,
                 response_body=None,
@@ -201,6 +208,37 @@ class WebhookDispatcher:
                 next_retry_at=next_retry,
                 dead_letter=dead_letter,
             )
+            await self._sync_email_event_status(delivery.email_event_id)
+            return delivery
+
+    async def _sync_email_event_status(self, email_event_id: uuid.UUID) -> None:
+        from sqlalchemy import select
+        from app.database.repositories.email_event_repository import EmailEventRepository
+
+        events = EmailEventRepository(self._session)
+        event = await events.get_by_id(email_event_id)
+        if event is None:
+            return
+
+        stmt = select(WebhookDelivery).where(WebhookDelivery.email_event_id == email_event_id)
+        result = await self._session.execute(stmt)
+        deliveries = result.scalars().all()
+
+        if not deliveries:
+            event.status = EmailEventStatus.DELIVERED.value
+        else:
+            statuses = [d.status for d in deliveries]
+            if any(s == WebhookDeliveryStatus.PENDING.value for s in statuses):
+                event.status = EmailEventStatus.PENDING.value
+            elif any(s == WebhookDeliveryStatus.DEAD_LETTERED.value for s in statuses):
+                event.status = EmailEventStatus.DEAD_LETTERED.value
+            elif any(s == WebhookDeliveryStatus.FAILED.value for s in statuses):
+                event.status = EmailEventStatus.FAILED.value
+            elif all(s == WebhookDeliveryStatus.DELIVERED.value for s in statuses):
+                event.status = EmailEventStatus.DELIVERED.value
+            
+        self._session.add(event)
+        await self._session.commit()
 
     async def deliver_test(self, *, webhook: Webhook) -> tuple[int, str]:
         payload = build_test_payload()
@@ -265,8 +303,8 @@ class WebhookService:
         )
         return webhook, secret
 
-    async def list_webhooks(self, *, user: User) -> list[Webhook]:
-        return await self._webhooks.list_for_user(user.id)
+    async def list_webhooks(self, *, user: User, limit: int = 50, offset: int = 0) -> list[Webhook]:
+        return await self._webhooks.list_for_user(user.id, limit=limit, offset=offset)
 
     async def get_webhook(self, *, user: User, webhook_id: uuid.UUID) -> Webhook:
         webhook = await self._webhooks.get_by_id_for_user(webhook_id, user.id)

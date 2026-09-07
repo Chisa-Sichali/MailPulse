@@ -14,6 +14,7 @@ export default function DashboardHeader() {
     queryFn: () => healthService.getSystemHealth(),
     staleTime: 1000 * 60 * 5,
     retry: 1,
+    refetchInterval: 60_000,
   });
 
   const setOverviewData = useDashboardStore((state) => state.setOverviewData);
@@ -30,8 +31,9 @@ export default function DashboardHeader() {
   const isConnected = Object.values(checks).every((c) => c === 'connected' || c === 'ok');
 
   if (dashboardStats.isPending) return <DashboardHeaderLoader />;
+  if (dashboardStats.isError) return <Card className="border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-800 dark:text-amber-300">System health is currently unavailable. Dashboard data will continue to refresh.</Card>;
   return (
-    <Card className="w-full overflow-hidden border-0 bg-linear-to-r from-[#6366f1] to-[#8b5cf6] text-white shadow-lg">
+    <Card className="w-full overflow-hidden border-0 bg-linear-to-r from-indigo-600 to-violet-600 text-white shadow-lg">
       <div className="flex flex-col gap-4 p-4 md:flex-row md:items-center md:gap-6 md:p-6">
         {/* Status */}
         <div className="flex min-w-0 flex-1 items-center gap-3">

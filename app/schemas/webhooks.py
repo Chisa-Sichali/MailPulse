@@ -35,6 +35,12 @@ class WebhookCreatedResponse(WebhookResponse):
     secret: str
 
 
+class WebhookListResponse(BaseModel):
+    items: list[WebhookResponse]
+    limit: int
+    offset: int
+
+
 class WebhookSecretResponse(BaseModel):
     secret: str
     secret_prefix: str

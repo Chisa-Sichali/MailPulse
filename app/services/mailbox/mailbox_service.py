@@ -44,8 +44,8 @@ class MailboxService:
             is_enabled=is_enabled,
         )
 
-    async def list_mailboxes(self, *, user: User) -> list[Mailbox]:
-        return await self._mailboxes.list_for_user(user.id)
+    async def list_mailboxes(self, *, user: User, limit: int = 50, offset: int = 0) -> list[Mailbox]:
+        return await self._mailboxes.list_for_user(user.id, limit=limit, offset=offset)
 
     async def get_mailbox(self, *, user: User, mailbox_id: UUID) -> Mailbox:
         mailbox = await self._mailboxes.get_by_id_for_user(mailbox_id, user.id)

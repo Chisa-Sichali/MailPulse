@@ -1,7 +1,6 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { CardContent } from '@/components/ui/card';
@@ -39,6 +38,7 @@ export default function DashboardStats() {
     queryFn: () => healthService.getAnalyticsOverview(queryDays),
     staleTime: 1000 * 60 * 5,
     retry: 1,
+    refetchInterval: 30_000,
   });
 
   const stats = dashboardAnalytics.data;
@@ -52,7 +52,7 @@ export default function DashboardStats() {
   }
 
   if (dashboardAnalytics.isError || !stats) {
-    return null;
+    return <div className="rounded-lg border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive">Dashboard metrics could not be loaded. They will retry automatically.</div>;
   }
 
   const displayStats = [
@@ -63,7 +63,7 @@ export default function DashboardStats() {
   ] as const;
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
       {displayStats.map((key) => {
         const config = STAT_CONFIGS[key];
         const rawValue = stats[key as keyof typeof stats];
@@ -72,8 +72,8 @@ export default function DashboardStats() {
           config?.format && typeof rawValue === 'number' ? config.format(rawValue) : rawValue;
 
         return (
-          <Card key={key} className="bg-card text-card-foreground border shadow-xs">
-            <CardContent className="flex flex-col gap-1.5 p-5">
+          <Card key={key} className="border-border/80 bg-card text-card-foreground shadow-sm">
+            <CardContent className="flex flex-col gap-1.5 p-4">
               <span className="text-muted-foreground text-xs font-semibold tracking-wider">
                 {config?.label.toUpperCase() ?? key}
               </span>

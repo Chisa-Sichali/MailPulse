@@ -1,11 +1,82 @@
+[project]
+name = "mailpulse"
+version = "1.0.0"
+description = "Email infrastructure platform with mailboxes, webhooks, and event monitoring"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+authors = [{ name = "MailPulse contributors" }]
+
+# Core web stack (pinned by requirements.txt, lifted verbatim)
+dependencies = [
+    # ── Web framework ────────────────────────────────────────────────────────
+    "annotated-doc==0.0.4",
+    "annotated-types==0.7.0",
+    "anyio==4.12.1",
+    "certifi==2026.1.4",
+    "charset-normalizer==3.4.4",
+    "click==8.3.1",
+    "fastapi==0.128.0",
+    "h11==0.16.0",
+    "idna==3.11",
+    "pydantic==2.12.5",
+    "pydantic_core==2.41.5",
+    "python-dotenv==1.2.1",
+    "requests==2.32.5",
+    "starlette==0.50.0",
+    "typing-inspection==0.4.2",
+    "typing_extensions==4.15.0",
+    "urllib3==2.6.3",
+    "uvicorn==0.40.0",
+    # ── MailPulse foundation ─────────────────────────────────────────────────
+    "pydantic-settings>=2.0.0,<3.0.0",
+    "sqlalchemy[asyncio]>=2.0.0,<3.0.0",
+    "asyncpg>=0.29.0,<1.0.0",
+    "alembic>=1.13.0,<2.0.0",
+    "python-jose[cryptography]>=3.3.0,<4.0.0",
+    "passlib[bcrypt]>=1.7.4,<2.0.0",
+    "bcrypt>=3.1.0,<4.1.0",
+    "email-validator>=2.0.0,<3.0.0",
+    "httpx>=0.27.0,<1.0.0",
+    "email-reply-parser~=0.5.12",
+    "rich~=15.0.0",
+    # ── Queue workers ────────────────────────────────────────────────────────
+    "arq>=0.26.0,<1.0.0",
+    "redis>=5.0.0,<6.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0,<9.0.0",
+    "pytest-asyncio>=0.24.0,<1.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.uv]
+# Keep the resolved lockfile committed so Docker builds are deterministic.
+# `uv lock` regenerates this; the Dockerfile uses `--locked` to fail-fast
+# if the lockfile is out of sync with pyproject.toml.
+required-version = ">=0.5.0"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Tool configuration (unchanged from the previous black-only pyproject)
+# ─────────────────────────────────────────────────────────────────────────────
+
 [tool.black]
 line-length = 88
 target-version = ['py310']
 include = '\.pyi?$'
 extend-exclude = '''
 /(
-    \.git
+  | \.git
   | \.venv
   | __pycache__
 )/
 '''
+
+# Pytest configuration lives in pytest.ini (root) — keep this file DRY.

@@ -192,7 +192,7 @@ class EmailEventService:
         return event
 
     async def retry_event(self, *, user_id: uuid.UUID, event_id: uuid.UUID) -> None:
-        from app.core.queue import enqueue_dispatch_webhook, enqueue_process_email
+        from app.core.queue import enqueue_dispatch_webhook
 
         event = await self.get_event(user_id=user_id, event_id=event_id)
         if event.status not in {
@@ -204,10 +204,6 @@ class EmailEventService:
 
         await self._events.mark_pending_retry(event)
 
-        if event.imap_uid:
-            await enqueue_process_email(
-                mailbox_id=event.mailbox_id,
-                imap_uid=event.imap_uid,
-            )
-        else:
-            await enqueue_dispatch_webhook(email_event_id=event.id)
+        # The event is already parsed and stored in the database.
+        # We only need to retry the webhook fan-out and delivery.
+        await enqueue_dispatch_webhook(email_event_id=event.id)

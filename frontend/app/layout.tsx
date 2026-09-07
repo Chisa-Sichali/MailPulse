@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toast";
 
 import QueryProvider from "../components/QueryProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Geist, Geist_Mono, Inter, Urbanist } from "next/font/google";
 
@@ -37,16 +38,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <QueryProvider>
-      <html
+    <html
         lang="en"
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${urbanist.variable} h-full antialiased`}
       >
-        <body className="min-h-full flex flex-col">
-          <TooltipProvider>{children}</TooltipProvider>
-          <Toaster />
+        <body className="min-h-full flex flex-col transition-colors duration-200">
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <QueryProvider>
+              <TooltipProvider>{children}</TooltipProvider>
+              <Toaster />
+            </QueryProvider>
+          </ThemeProvider>
         </body>
       </html>
-    </QueryProvider>
   );
 }

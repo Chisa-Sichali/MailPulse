@@ -1,9 +1,16 @@
-import { CreateUserRequest, CreateUserResponse, LoginRequest } from './Types';
-import { extractErrorMessage, setTokens } from '@/utils/auth-utils';
+import {
+  CreateUserRequest,
+  CreateUserResponse,
+  LoginRequest,
+  RefreshTokenRequest,
+  RefreshTokenResponse,
+} from './Types';
+import { extractErrorMessage, removeTokens, setTokens } from '@/utils/auth-utils';
 import { config } from '@/config/config';
+import { apiFetch } from '@/services/api-client';
 
 class AuthService {
-  private baseUrl = config.fastapi_backend_url;
+  private baseUrl = `${config.fastapi_backend_url}/api/v1`;
 
   /**
      * Sends a request to the FastAPI backend to create a new User
@@ -14,7 +21,7 @@ class AuthService {
   async CreateUser(request: CreateUserRequest): Promise<CreateUserResponse> {
     let response: Response;
     try {
-      response = await fetch(`${this.baseUrl}/api/v1/auth/register`, {
+      response = await fetch(`${this.baseUrl}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +51,7 @@ class AuthService {
   async LoginUser(request: LoginRequest): Promise<CreateUserResponse> {
     let response: Response;
     try {
-      response = await fetch(`${this.baseUrl}/api/v1/auth/login`, {
+      response = await fetch(`${this.baseUrl}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,6 +71,57 @@ class AuthService {
     setTokens(data.access_token, data.refresh_token);
 
     return data;
+  }
+
+  async RefreshTokens(): Promise<RefreshTokenResponse> {
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if (!refreshToken) {
+      removeTokens();
+      throw new Error('No refresh token found');
+    }
+
+    let response: Response;
+    try {
+      const payload: RefreshTokenRequest = { refresh_token: refreshToken };
+      response = await fetch(`${this.baseUrl}/auth/refresh`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+    } catch (error) {
+      console.error('Error reaching auth server during refresh:', error);
+      throw new Error('Could not reach the server. Please try again.');
+    }
+
+    if (!response.ok) {
+      removeTokens();
+      const errorMessage = await extractErrorMessage(response);
+      throw new Error(errorMessage || 'Session expired. Please log in again.');
+    }
+
+    const data: RefreshTokenResponse = await response.json();
+    setTokens(data.access_token, data.refresh_token);
+
+    return data;
+  }
+
+  async GetCurrentUser() {
+    const response = await apiFetch('/auth/me');
+    if (!response.ok) throw new Error(await extractErrorMessage(response));
+    return response.json() as Promise<import('./Types').UserProfile>;
+  }
+
+  async Logout(): Promise<void> {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) return;
+    const response = await fetch(`${this.baseUrl}/auth/logout`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh_token: refreshToken }),
+    });
+    if (!response.ok) throw new Error(await extractErrorMessage(response));
   }
 }
 

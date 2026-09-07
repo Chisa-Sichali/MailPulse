@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime, timezone
 from typing import Optional, Sequence
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.models.mailbox import Mailbox
@@ -21,8 +21,23 @@ class MailboxRepository:
         result = await self._session.execute(stmt)
         return result.scalar_one_or_none()
 
-    async def list_for_user(self, user_id: uuid.UUID) -> Sequence[Mailbox]:
-        stmt = select(Mailbox).where(Mailbox.user_id == user_id, Mailbox.deleted_at.is_(None))
+    async def get_by_email_for_user(
+        self,
+        *,
+        user_id: uuid.UUID,
+        email_address: str,
+    ) -> Optional[Mailbox]:
+        """Find an active mailbox by its normalized address for one user."""
+        stmt = select(Mailbox).where(
+            Mailbox.user_id == user_id,
+            func.lower(Mailbox.email_address) == email_address.strip().lower(),
+            Mailbox.deleted_at.is_(None),
+        )
+        result = await self._session.execute(stmt)
+        return result.scalar_one_or_none()
+
+    async def list_for_user(self, user_id: uuid.UUID, *, limit: int = 50, offset: int = 0) -> Sequence[Mailbox]:
+        stmt = select(Mailbox).where(Mailbox.user_id == user_id, Mailbox.deleted_at.is_(None)).order_by(Mailbox.created_at.desc()).limit(limit).offset(offset)
         result = await self._session.execute(stmt)
         return result.scalars().all()
 

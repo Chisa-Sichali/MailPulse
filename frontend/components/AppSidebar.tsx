@@ -4,7 +4,6 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
   SidebarMenu,
   SidebarMenuItem,
   SidebarHeader,
@@ -14,11 +13,34 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { SidebarLinks } from "@/utils/data/sidebar-data";
-import { Mail } from "lucide-react";
+import { ChevronUp, Mail, UserRound } from "lucide-react";
+import { DarkModeSwitcher } from "@/components/DarkModeSwitcher";
+import { LogOut } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { authService } from "@/services/auth";
+import { removeTokens } from "@/utils/auth-utils";
+import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/toast";
+import { useDashboardStore } from "@/stores/dashboard.store";
 
 export default function AppSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const clearDashboardState = useDashboardStore((state) => state.clearOverviewData);
+  const profile = useQuery({ queryKey: ['currentUser'], queryFn: authService.GetCurrentUser, staleTime: 5 * 60_000 });
   const currentPath = pathname?.split("/")[1] || "";
+  const logout = useMutation({
+    mutationFn: authService.Logout,
+    onSettled: (_data, error) => {
+      removeTokens();
+      queryClient.clear();
+      clearDashboardState();
+      router.replace('/');
+      if (error) toast.add({ title: 'Signed out locally', description: 'The server could not be reached to revoke this session.', type: 'warning' });
+    },
+  });
 
   return (
     <Sidebar>
@@ -52,6 +74,20 @@ export default function AppSidebar() {
           ))}
         </SidebarMenu>
       </SidebarContent>
+      <SidebarFooter className="border-t border-sidebar-border p-2">
+        <details className="group relative">
+          <summary className="flex cursor-pointer list-none items-center gap-2 rounded-md px-2 py-2 hover:bg-sidebar-accent [&::-webkit-details-marker]:hidden">
+            <span className="flex size-8 items-center justify-center rounded-full bg-primary/10 text-primary"><UserRound className="size-4" /></span>
+            <span className="min-w-0 flex-1 text-left"><span className="block truncate text-sm font-medium">{profile.data?.full_name || 'Account'}</span><span className="block truncate text-xs text-muted-foreground">{profile.data?.email || 'Loading profile…'}</span></span>
+            <ChevronUp className="size-4 text-muted-foreground transition-transform group-open:rotate-180" />
+          </summary>
+          <div className="absolute right-0 bottom-full left-0 z-30 mb-2 rounded-lg border border-sidebar-border bg-popover p-2 shadow-lg">
+            <div className="flex items-center justify-between px-2 py-1.5 text-xs text-muted-foreground"><span>Appearance</span><DarkModeSwitcher /></div>
+            <Separator className="my-1" />
+            <Button className="w-full justify-start" variant="ghost" disabled={logout.isPending} onClick={() => logout.mutate()}><LogOut />{logout.isPending ? 'Signing out…' : 'Sign out'}</Button>
+          </div>
+        </details>
+      </SidebarFooter>
     </Sidebar>
   );
 }

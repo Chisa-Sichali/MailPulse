@@ -5,29 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d95e1a6b-a02e-41a4-a8f2-12413f957aac" name="Changes" comment="Update(readme):&#10;- Updated README.md to reflect ongoing frontend chagnes as well as updated running process.">
-      <change afterPath="$PROJECT_DIR$/frontend/.prettierrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/components/skeleton/DashboardHeaderLoader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/features/dashboard/DashboardStats.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/assets/degraded.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/assets/operational.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/services/Types/dashboard-types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/services/health.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/stores/dashboard.store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/email_forwarder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/email_forwarder.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/email_forwarder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mailpulse.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apprunner.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/apprunner.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v1/events/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/events/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/database/repositories/email_event_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/repositories/email_event_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/database/repositories/webhook_delivery_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/repositories/webhook_delivery_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/events.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/events.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/email_processing/event_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/email_processing/event_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/webhook/webhook_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/webhook/webhook_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apprunner.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/postcss.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/components/Layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/components/ui.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/lib/api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/lib/theme.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/main.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/AnalyticsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/DashboardPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/EventsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/HealthPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/LoginPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/MailboxesPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/pages/WebhooksPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/vite-env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/tailwind.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/tsconfig.tsbuildinfo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/vite.config.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/(protected)/dashboard/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/(protected)/dashboard/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/(protected)/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/(protected)/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/features/auth/LoginContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/features/auth/LoginContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/services/Types/user-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/services/Types/user-types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/services/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/services/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/stores/auth.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/stores/auth.store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/(protected)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/(protected)/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/features/events/EventsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/features/events/EventsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/next.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/services/Types/infrastructure-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/services/Types/infrastructure-types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,10 +91,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHELLCHECK.PATH": "C:\\Users\\chisa\\AppData\\Roaming\\JetBrains\\PyCharm2026.2\\plugins\\Shell Script\\shellcheck.exe",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "development",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/chisa/Documents/Personal/Projects/Open Source/email_forwarder",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
@@ -82,6 +110,12 @@
   </component>
   <component name="RunManager">
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63343/MailPulse/sketches/001-sleek-professional/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <recent_temporary>

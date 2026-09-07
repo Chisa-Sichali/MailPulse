@@ -28,8 +28,8 @@ class WebhookRepository:
         result = await self._session.execute(stmt)
         return result.scalar_one_or_none()
 
-    async def list_for_user(self, user_id: uuid.UUID) -> Sequence[Webhook]:
-        stmt = select(Webhook).where(Webhook.user_id == user_id, Webhook.deleted_at.is_(None))
+    async def list_for_user(self, user_id: uuid.UUID, *, limit: int = 50, offset: int = 0) -> Sequence[Webhook]:
+        stmt = select(Webhook).where(Webhook.user_id == user_id, Webhook.deleted_at.is_(None)).order_by(Webhook.created_at.desc()).limit(limit).offset(offset)
         result = await self._session.execute(stmt)
         return result.scalars().all()
 

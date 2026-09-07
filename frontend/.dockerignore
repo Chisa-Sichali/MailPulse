@@ -1,0 +1,51 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# frontend/.dockerignore — keep the build context lean and secret-free.
+# The Dockerfile only needs source + lockfile + public/.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Dependencies — installed fresh inside the `deps` stage
+node_modules
+.pnp
+.pnp.js
+
+# Build output — produced inside the `builder` stage
+.next
+out
+dist
+build
+.turbo
+*.tsbuildinfo
+
+# Test + coverage artifacts
+coverage
+.nyc_output
+
+# Local env files — NEVER bake secrets into images
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor / IDE
+.vscode
+.idea
+.DS_Store
+*.swp
+*.swo
+
+# VCS
+.git
+.gitignore
+.gitattributes
+
+# Misc
+.eslintcache
+.prettierrc
+README.md
+Dockerfile
+.dockerignore
