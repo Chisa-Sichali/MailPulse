@@ -182,8 +182,16 @@ export default function EventsPage() {
                             disabled={retry.isPending}
                             onClick={() => retry.mutate(event.id)}
                           >
-                            <RotateCcw className={retry.isPending && retry.variables === event.id ? 'animate-spin' : ''} />
-                            {retry.isPending && retry.variables === event.id ? 'Retrying...' : 'Retry'}
+                            <RotateCcw
+                              className={
+                                retry.isPending && retry.variables === event.id
+                                  ? 'animate-spin'
+                                  : ''
+                              }
+                            />
+                            {retry.isPending && retry.variables === event.id
+                              ? 'Retrying...'
+                              : 'Retry'}
                           </Button>
                         )}
                       </td>
