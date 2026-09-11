@@ -1,4 +1,4 @@
-# MailPulse
+#
 
 > **Turn any inbox into a webhook stream.**
 > MailPulse monitors IMAP mailboxes, parses incoming mail into clean structured
