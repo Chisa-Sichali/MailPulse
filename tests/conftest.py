@@ -1,9 +1,12 @@
+import asyncio
 import os
 from collections.abc import AsyncGenerator
 
 import pytest
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
+from sqlalchemy import text
+from sqlalchemy.engine import make_url
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from app.core.config import get_settings
@@ -15,6 +18,49 @@ TEST_DATABASE_URL = os.getenv(
     "TEST_DATABASE_URL",
     "postgresql+asyncpg://mailpulse:mailpulse@localhost:5433/mailpulse_test",
 )
+
+
+async def _ensure_test_database_exists() -> None:
+    """Create the test database if it does not exist yet.
+
+    The fixtures below only create/drop the *schema* (``Base.metadata``), so
+    the database itself has to be there first. Doing it here means ``pytest``
+    works on a fresh checkout with nothing more than::
+
+        docker compose up -d postgres
+
+    instead of failing every test with
+    ``InvalidCatalogNameError: database "mailpulse_test" does not exist``.
+    """
+    url = make_url(TEST_DATABASE_URL)
+    target_db = url.database
+    if not target_db:
+        return
+
+    # Postgres has no "CREATE DATABASE IF NOT EXISTS", so connect to the
+    # maintenance database, check, then create.
+    admin_engine = create_async_engine(
+        url.set(database="postgres"),
+        isolation_level="AUTOCOMMIT",
+    )
+    try:
+        async with admin_engine.connect() as conn:
+            exists = await conn.scalar(
+                text("SELECT 1 FROM pg_database WHERE datname = :name"),
+                {"name": target_db},
+            )
+            if exists is None:
+                # A database name cannot be a bound parameter. `target_db`
+                # comes from our own configuration, not from user input.
+                await conn.exec_driver_sql(f'CREATE DATABASE "{target_db}"')
+    finally:
+        await admin_engine.dispose()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _test_database() -> None:
+    """Session-scoped, so it runs once before any test that needs the DB."""
+    asyncio.run(_ensure_test_database_exists())
 
 
 @pytest.fixture(scope="session")

@@ -11,7 +11,7 @@ If you only want to evaluate the system end-to-end, the
 Verify the toolchain once before you start:
 
 ```bash
-python --version    # 3.11 or 3.12
+python --version    # 3.11 (pyproject pins >=3.11,<3.12)
 node --version      # 20+ (frontend only)
 docker --version    # 24+
 uv --version        # recommended for Python deps
@@ -81,8 +81,9 @@ What it does:
   hex), and `CREDENTIAL_ENCRYPTION_KEY` (random base64) only if missing or
   still set to a placeholder.
 - Sets `DATABASE_URL` and `REDIS_URL` based on the mode flag.
-- Writes `frontend/.env.local` with the right
-  `NEXT_PUBLIC_FASTAPI_BACKEND_URL` for the mode.
+- Writes `frontend/.env.local` with
+  `NEXT_PUBLIC_FASTAPI_BACKEND_URL=http://localhost:8080`, which is
+  host-reachable in both modes (the browser calls this URL directly).
 - Refuses to write inside a runtime container unless `ENV_GEN_ALLOWED=1`
   (the `env-gen` service in `docker-compose.yml` sets this).
 
@@ -149,9 +150,9 @@ docker compose logs -f api worker  # tail logs
 
 - The default test database is `postgresql+asyncpg://mailpulse:mailpulse@localhost:5433/mailpulse_test`.
   Override with `TEST_DATABASE_URL=… pytest`.
-- `tests/conftest.py` creates and drops the schema per session via
-  `Base.metadata.create_all` / `drop_all`, so migrations are not
-  exercised by tests.
+- `tests/conftest.py` creates that database if it is missing, then
+  creates and drops the schema per session via `Base.metadata.create_all`
+  / `drop_all`, so migrations are not exercised by tests.
 - Coverage tooling is **not configured**. Add `pytest-cov` if you want it.
 
 ## Debugging

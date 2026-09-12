@@ -1,10 +1,13 @@
 name: Frontend CI
 
+# NOTE: this repo's branches are `master` (default) and `development`.
+# The original filter was `[main]`, which does not exist here — so no run
+# ever fired and the README badges stayed grey.
 on:
   push:
-    branches: [ main ]
+    branches: [ master, development ]
   pull_request:
-    branches: [ main ]
+    branches: [ master, development ]
 
 jobs:
   build:
@@ -14,6 +17,12 @@ jobs:
       run:
         working-directory: frontend
 
+    env:
+      # NEXT_PUBLIC_* vars are inlined at build time. These match
+      # scripts/generate-env.sh so the CI build mirrors a local one.
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+      NEXT_PUBLIC_FASTAPI_BACKEND_URL: http://localhost:8080
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,9 +30,12 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          # Matches the runtime used by frontend/Dockerfile (node:20-alpine).
+          node-version: 20
           cache: npm
-          cache-dependency-path: dashboard/package-lock.json
+          # The dashboard lives in `frontend/`; the old path pointed at the
+          # removed `dashboard/` directory.
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Install dependencies
         run: npm ci

@@ -1,0 +1,10 @@
+# Shell scripts MUST be checked out with LF endings.
+#
+# The one-shot `env-gen` compose service runs scripts/generate-env.sh under
+# busybox `sh` (alpine). With a CRLF checkout the script dies immediately:
+#
+#   /app/scripts/generate-env.sh: set: line 23: illegal option -o pipefail
+#
+# because busybox sees the option name as "pipefail\r". Windows checkouts
+# otherwise convert these files to CRLF via core.autocrlf=true.
+*.sh text eol=lf

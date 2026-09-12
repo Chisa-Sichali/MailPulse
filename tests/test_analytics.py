@@ -29,7 +29,7 @@ async def _seed_analytics_data(session_factory, *, user_id: uuid.UUID) -> None:
             sender_name="Sender",
             recipients=["analytics@example.com"],
             subject="Analytics test",
-            status=EmailEventStatus.PROCESSED.value,
+            status=EmailEventStatus.DELIVERED.value,
         )
         session.add(event)
         await session.commit()

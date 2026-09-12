@@ -9,14 +9,26 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.models.webhook import Webhook
 
+
 class WebhookRepository:
+    #: Prefix carried by every webhook signing secret. Documented in
+    #: docs/api.md and docs/webhooks.md, so it is part of the public contract.
+    SECRET_PREFIX = "whsec_"
+
     def __init__(self, session: AsyncSession):
         self._session = session
 
     @staticmethod
     def generate_secret() -> str:
+        """Return a new webhook signing secret, e.g. ``whsec_ab12cd...``.
+
+        The ``whsec_`` prefix is part of the documented contract
+        (see ``docs/api.md`` and ``docs/webhooks.md``) so that clients can
+        recognise the value and reject anything that does not look like one.
+        """
         alphabet = string.ascii_letters + string.digits
-        return ''.join(secrets.choice(alphabet) for i in range(32))
+        body = "".join(secrets.choice(alphabet) for _ in range(32))
+        return f"{WebhookRepository.SECRET_PREFIX}{body}"
 
     async def get_by_id(self, webhook_id: uuid.UUID) -> Optional[Webhook]:
         stmt = select(Webhook).where(Webhook.id == webhook_id, Webhook.deleted_at.is_(None))

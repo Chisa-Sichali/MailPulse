@@ -1,14 +1,44 @@
 name: Backend CI
 
+# NOTE: this repo's branches are `master` (default) and `development`.
+# The original filter was `[main]`, which does not exist here — so no run
+# ever fired and the README badges stayed grey.
 on:
   push:
-    branches: [ main ]
+    branches: [ master, development ]
   pull_request:
-    branches: [ main ]
+    branches: [ master, development ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    # The suite is integration-style: it talks to a real Postgres and Redis.
+    # Postgres is published on 5433 to match the default TEST_DATABASE_URL in
+    # tests/conftest.py; conftest creates `mailpulse_test` itself if missing.
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: mailpulse
+          POSTGRES_PASSWORD: mailpulse
+          POSTGRES_DB: mailpulse
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U mailpulse -d mailpulse"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout
@@ -17,7 +47,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          # Must satisfy `requires-python = ">=3.11,<3.12"` in pyproject.toml
+          # and match the image in Dockerfile (python:3.11-slim).
+          python-version: "3.11"
 
       - name: Install uv
         uses: astral-sh/setup-uv@v6
