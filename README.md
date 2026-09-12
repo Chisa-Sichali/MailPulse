@@ -244,8 +244,9 @@ Once running:
 | PostgreSQL | `localhost:5433` (user `mailpulse` / `mailpulse`) |
 | Redis      | `localhost:6379`                                  |
 
-Migrations run automatically when the `api` and `worker` containers start (`alembic upgrade head` is in their
-entrypoint).
+Migrations run automatically: a one-shot `migrate` service applies `alembic upgrade head`, and `api` and
+`worker` both wait for it to finish before starting. Running the upgrade once avoids two processes racing the
+same migration on a fresh database.
 
 ### Option B — Backend locally, infra in Docker
 

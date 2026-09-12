@@ -25,6 +25,31 @@ services:
     ports:
       - "6379:6379"
 
+  # ───────────────────────────────────────────────────────────────────────────
+  # migrate — one-shot Alembic runner.
+  #
+  # api and worker previously BOTH ran `alembic upgrade head` on startup, which
+  # races on a fresh database: whoever loses gets
+  #   UniqueViolationError: duplicate key ... (alembic_version, ...) already exists
+  # exits 1, and takes the dashboard's `depends_on: api: service_healthy` with
+  # it. Applying the upgrade exactly once, to completion, before either process
+  # starts removes the race. Reuses the same image (already cached).
+  # ───────────────────────────────────────────────────────────────────────────
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://mailpulse:mailpulse@postgres:5432/mailpulse
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: alembic upgrade head
+    restart: "no"
+
   api:
     build:
       context: .
@@ -37,13 +62,12 @@ services:
       DATABASE_URL: postgresql+asyncpg://mailpulse:mailpulse@postgres:5432/mailpulse
       REDIS_URL: redis://redis:6379/0
     depends_on:
-      postgres:
-        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
       redis:
         condition: service_healthy
     command: >
-      sh -c "alembic upgrade head &&
-             uvicorn app.main:app --host 0.0.0.0 --port 8080"
+      uvicorn app.main:app --host 0.0.0.0 --port 8080
 
   worker:
     build:
@@ -55,13 +79,12 @@ services:
       DATABASE_URL: postgresql+asyncpg://mailpulse:mailpulse@postgres:5432/mailpulse
       REDIS_URL: redis://redis:6379/0
     depends_on:
-      postgres:
-        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
       redis:
         condition: service_healthy
     command: >
-      sh -c "alembic upgrade head &&
-             arq app.workers.settings.WorkerSettings"
+      arq app.workers.settings.WorkerSettings
     # The worker runs `arq`, not uvicorn, so the HTTP HEALTHCHECK baked into
     # the shared Dockerfile (curl :8080) can never succeed — without this
     # override the container sits at "unhealthy" forever. Probe the broker

@@ -18,6 +18,7 @@ shared network:
 | ----------- | --------------------- | ----------- | ------------- |
 | `postgres`  | `postgres:16-alpine`  | `5433`      | `5432`        |
 | `redis`     | `redis:7-alpine`      | `6379`      | `6379`        |
+| `migrate`   | built from `Dockerfile` (one-shot) | — | —         |
 | `api`       | built from `Dockerfile` | `8080`    | `8080`        |
 | `worker`    | built from `Dockerfile` | —         | —             |
 | `dashboard` | built from `frontend/Dockerfile` | `3000` | `3000` |
@@ -95,8 +96,9 @@ docker compose up -d --build
 curl http://localhost:8080/health/system
 ```
 
-Migrations run automatically via the `api` and `worker` `command:` —
-both do `alembic upgrade head` before launching their main process.
+Migrations run automatically via a one-shot `migrate` service. `api` and
+`worker` wait for it (`service_completed_successfully`) instead of each
+running `alembic upgrade head` themselves — that raced on a fresh database.
 
 ## Reverse proxy
 
