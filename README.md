@@ -1,5 +1,7 @@
 #
 
+<img src="frontend/public/assets/Mailpulse.jpg" alt="Project logo">
+
 > **Turn any inbox into a webhook stream.**
 > MailPulse monitors IMAP mailboxes, parses incoming mail into clean structured
 > JSON, and delivers it to your webhook URLs — with retries, backoff, signing,
@@ -245,8 +247,8 @@ Once running:
 | Redis      | `localhost:6379`                                  |
 
 Migrations run automatically: a one-shot `migrate` service applies `alembic upgrade head`, and `api` and
-`worker` both wait for it to finish before starting. Running the upgrade once avoids two processes racing the
-same migration on a fresh database.
+`worker` both wait for it to finish before starting. Running the upgrade once avoids two processes racing the same
+migration on a fresh database.
 
 ### Option B — Backend locally, infra in Docker
 
@@ -534,10 +536,9 @@ pytest -k webhook            # by keyword
 
 Tests use a separate database (`TEST_DATABASE_URL`, default
 `postgresql+asyncpg://mailpulse:mailpulse@localhost:5433/mailpulse_test`)
-`tests/conftest.py` creates that database if it does not exist, then
-creates/drops the schema per session via SQLAlchemy metadata, so no manual
-database setup is needed. The Postgres and Redis services must be
-reachable; the simplest way is to start them via Docker Compose:
+`tests/conftest.py` creates that database if it does not exist, then creates/drops the schema per session via SQLAlchemy
+metadata, so no manual database setup is needed. The Postgres and Redis services must be reachable; the simplest way is
+to start them via Docker Compose:
 
 ```bash
 docker compose up -d postgres redis
