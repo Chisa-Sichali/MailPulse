@@ -41,7 +41,7 @@ COPY . .
 # These get inlined into the client bundle by Next.js, so changing them
 # requires a rebuild.
 ARG NEXT_PUBLIC_API_URL=http://localhost:3000
-ARG NEXT_PUBLIC_FASTAPI_BACKEND_URL=http://localhost:8000
+ARG NEXT_PUBLIC_FASTAPI_BACKEND_URL=http://localhost:8080
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} \
     NEXT_PUBLIC_FASTAPI_BACKEND_URL=${NEXT_PUBLIC_FASTAPI_BACKEND_URL} \
     NEXT_TELEMETRY_DISABLED=1 \
