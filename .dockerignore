@@ -1,0 +1,43 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Docker build-context exclusions for the ROOT context (api + worker images).
+#
+# The backend Dockerfile ends with `COPY . .`. Without this file that copy
+# pulls in the local `.venv`, `.env` (real secrets), `.git`, and the frontend's
+# node_modules/.next (~1.1 GB) — which both leaks secrets into the image and
+# produced a 2.7 GB image.
+#
+# The dashboard is built from `frontend/` and has its own .dockerignore.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# VCS / CI / IDE
+.git
+.gitignore
+.github
+.idea
+*.iml
+
+# Local environment + secrets. Never bake these into an image: docker compose
+# supplies them at runtime via `env_file: .env` (read from the host, not the
+# image) plus the per-service `environment:` block.
+.env
+.env.*
+!.env.example
+
+# Python virtualenvs and caches
+.venv
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local runtime artifacts
+logs/
+
+# The dashboard is built by frontend/Dockerfile in its own context.
+frontend
+
+# Not needed at runtime.
+docs/
+tests/
