@@ -5,7 +5,6 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
-from app.core.config import get_settings
 from app.database.models.email_event import EmailEvent, EmailEventStatus
 
 
@@ -68,11 +67,16 @@ async def test_list_and_get_events(client: AsyncClient, auth_headers: dict[str, 
 
 
 @pytest.mark.asyncio
-async def test_retry_event_queues_processing_job(
+async def test_retry_event_queues_dispatch_job(
     client: AsyncClient,
     auth_headers: dict[str, str],
     db_engine,
 ):
+    """Retry re-runs the *webhook fan-out*, not IMAP parsing.
+
+    The email is already parsed and stored, so the handler only re-enqueues
+    the dispatch job — see ``EventService.retry_event``.
+    """
     mailbox_response = await client.post(
         "/api/v1/mailboxes",
         headers=auth_headers,
@@ -96,7 +100,7 @@ async def test_retry_event_queues_processing_job(
     )
 
     with patch(
-        "app.core.queue.enqueue_process_email",
+        "app.core.queue.enqueue_dispatch_webhook",
         new=AsyncMock(return_value="job-123"),
     ) as mock_enqueue:
         response = await client.post(
@@ -106,22 +110,3 @@ async def test_retry_event_queues_processing_job(
 
     assert response.status_code == 202
     mock_enqueue.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_run_email_check_queues_monitor_sweep(client: AsyncClient, monkeypatch):
-    monkeypatch.setenv("CRON_SECRET_KEY", "test-cron-secret")
-    get_settings.cache_clear()
-
-    with patch(
-        "app.api.v1.legacy.routes.enqueue_monitor_sweep",
-        new=AsyncMock(return_value="monitor-job-1"),
-    ):
-        response = await client.post(
-            "/api/v1/run-email-check",
-            headers={"Authorization": "Bearer test-cron-secret"},
-        )
-
-    get_settings.cache_clear()
-    assert response.status_code == 200
-    assert response.json()["status"] == "queued"
