@@ -204,7 +204,7 @@ runs, and the dispatch job only enqueues one delivery per webhook. Retry timing 
 Verify your local toolchain before cloning:
 
 ```bash
-python --version    # 3.11 or 3.12
+python --version    # 3.11 (pyproject pins >=3.11,<3.12)
 node --version      # 20 or newer (frontend only)
 docker --version    # 24+
 uv --version        # optional but recommended (https://docs.astral.sh/uv/)
@@ -213,6 +213,9 @@ git --version
 
 You also need a running PostgreSQL 16 and Redis 7. The fastest path is the Docker Compose setup below, which provisions
 both.
+
+> **Windows:** `scripts/generate-env.sh` is a bash script — run it from Git Bash
+> (or WSL), not PowerShell.
 
 ### Option A — Full stack via Docker Compose
 
@@ -444,7 +447,7 @@ The backend reads its configuration from a `.env` file at the project root via
 | Variable                          | Required | Default                 | Description                                               |
 |-----------------------------------|----------|-------------------------|-----------------------------------------------------------|
 | `NEXT_PUBLIC_API_URL`             | no       | `http://localhost:3000` | Public base URL of the dashboard itself (used for links). |
-| `NEXT_PUBLIC_FASTAPI_BACKEND_URL` | **yes**  | `http://localhost:8000` | Base URL the browser uses to reach the FastAPI backend.   |
+| `NEXT_PUBLIC_FASTAPI_BACKEND_URL` | **yes**  | `http://localhost:8080` | Base URL the browser uses to reach the FastAPI backend.   |
 
 `NEXT_PUBLIC_*` values are inlined into the client bundle at build time by Next.js, so changing them requires a rebuild.
 
@@ -530,8 +533,10 @@ pytest -k webhook            # by keyword
 
 Tests use a separate database (`TEST_DATABASE_URL`, default
 `postgresql+asyncpg://mailpulse:mailpulse@localhost:5433/mailpulse_test`)
-and create/drop the schema per session via SQLAlchemy metadata. The Postgres and Redis services must be reachable; the
-simplest way is to start them via Docker Compose:
+`tests/conftest.py` creates that database if it does not exist, then
+creates/drops the schema per session via SQLAlchemy metadata, so no manual
+database setup is needed. The Postgres and Redis services must be
+reachable; the simplest way is to start them via Docker Compose:
 
 ```bash
 docker compose up -d postgres redis
